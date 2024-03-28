@@ -28,8 +28,10 @@ def send_order_process(call):
     # Здесь можно вставить процесс покупки через интернет эквайринг
     model = call.data[6:]
     now = datetime.now()
+    order_number = 1
+    sqlite.insert_order_to_base(model, call.from_user.id, now, "оплачено", "в обработке", order_number)
+    sqlite.insert_order_to_orders_cache(order_number, call.from_user.id, "в обработке")
 
-    sqlite.insert_order_to_base(model, call.from_user.id, now, "оплачено")
     # bot.answer_callback_query(call.from_user.id, )
     bot.answer_callback_query(call.id, "Заказ оформлен, скоро с вами свяжутся в телеграме.", show_alert=True)
     bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
