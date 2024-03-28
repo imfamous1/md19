@@ -8,7 +8,6 @@ def register_rndm_handlers():
     bot.register_message_handler(send_user_orders, regexp='Заказы')
 
 
-
 def send_user_orders(message):
 
     details = db.get_order_details(message.from_user.id)
@@ -28,3 +27,11 @@ def auto_order_status_check():
             db.update_last_known_status(current_status, 1)
 
         time.sleep(5)
+
+    # schedule - модули для расписания, например напоминаний
+    # введение
+    # 1 анализ предметной области
+    # 1.1 - структура бота
+    # 2 анализ информационных технологий
+    # 3 разработка бота
+    # заключение
